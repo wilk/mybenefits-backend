@@ -1,0 +1,11 @@
+{
+  "db": {
+    "url": "mongo://localhost/myBenefits"
+  },
+  "logger": {
+    "name": "myBenefits"
+  },
+  "auth": {
+    "secret": "dj0ac9wjc9qjc9ajajcj j9idsi%% adZZZxkanoqj !_3 1"
+  }
+}
