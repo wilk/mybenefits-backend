@@ -39,6 +39,8 @@ jspm_packages
 typings
 
 *.js
+app/**/*.js
 *.map
+app/**/*.map
 config/local.json
 dist
