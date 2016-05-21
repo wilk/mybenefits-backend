@@ -1,0 +1,34 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "tslint -v && mocha --version && tsc -v && tsd --version && typedoc -v",
+    "postinstall": "tsd install",
+    "pretest": "tslint index.ts ./lib/**/*.ts ./test/**/*.ts && tsc",
+    "preversion": "tslint index.ts",
+    "test": "mocha dist/test --no-timeouts"
+  },
+  "author": {
+    "name": "Vincenzo (Wilk) Ferrari",
+    "email": "wilk3ert@gmail.com",
+    "url": "https://github.com/wilk"
+  },
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": "~3.8.6"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "config": "^1.20.3",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.17"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
