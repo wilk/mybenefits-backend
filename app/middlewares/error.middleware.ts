@@ -4,7 +4,7 @@ import {HttpError} from "../utils/util.util";
 function errorMiddleware(err: HttpError, req, res, next): void {
     logger.error(err);
     
-    res.status(err.code || 500).send(err.toString());
+    res.status(err.code || 500).send(err.message);
 }
 
 export {errorMiddleware};
