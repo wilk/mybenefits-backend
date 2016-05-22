@@ -1,4 +1,7 @@
 {
+  "server": {
+    "port": 12345
+  },
   "db": {
     "url": "mongo://localhost/myBenefits"
   },
