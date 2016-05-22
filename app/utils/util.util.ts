@@ -16,7 +16,7 @@ interface ICRUDController {
     
     list?(req, res, next);
     single(req, res, next);
-    create(req, res, next);
+    create?(req, res, next);
     delete(req, res, next);
     update(req, res, next);
 }

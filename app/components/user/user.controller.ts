@@ -3,24 +3,7 @@ import {UserModel} from './user.model';
 
 class UserController extends BaseController implements ICRUDController {
     prefix = 'UserController::';
-
-    async create(req, res, next) {
-        try {
-            this.logger.info(`${this.prefix}create`);
-
-            let userData = {
-                email: req.body.email,
-                password: req.body.password
-            };
-
-            let user = await UserModel.create(userData);
-            res.json(user);
-        }
-        catch (err) {
-            BaseController.errorHandler(err, next);
-        }
-    }
-
+    
     async single(req, res, next) {
         try {
             this.logger.info(`${this.prefix}single`);

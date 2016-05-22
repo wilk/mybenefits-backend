@@ -3,8 +3,6 @@ import * as express from 'express';
 
 let userRouter = express.Router();
 
-userRouter.route('/')
-    .post(userCtrl.create.bind(userCtrl));
 userRouter.route('/:id')
     .get(userCtrl.single.bind(userCtrl))
     .put(userCtrl.update.bind(userCtrl))
