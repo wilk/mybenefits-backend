@@ -2,6 +2,8 @@ import {BaseController, HttpError} from '../../utils/util.util';
 import {UserModel} from '../user/user.model';
 import * as jwt from 'jwt-simple';
 import * as config from 'config';
+import * as moment from 'moment';
+import {IToken} from "../../middlewares/auth.middleware";
 
 class AuthController extends BaseController {
     prefix = 'AuthController::';
@@ -32,13 +34,18 @@ class AuthController extends BaseController {
                 password: req.body.password
             };
 
+            let expirable = req.body.expirable;
+
             let user: any = await UserModel.findOne(userData);
             if (user === null) return next(new HttpError(400, 'wrong email or password'));
             
-            let tokenData = {
-                id: user._id,
-                email: user.email
+            let tokenData: IToken = {
+                user: {
+                    id: user._id,
+                    email: user.email
+                }
             };
+            if (expirable) tokenData.expire = moment().add(7, 'days');
             let token = jwt.encode(tokenData, config.get<string>('auth.secret'));
             
             res.send(token);
