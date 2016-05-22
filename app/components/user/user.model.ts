@@ -1,8 +1,5 @@
 import * as mongoose from 'mongoose';
 
-const ROLE_ADMIN = 'admin';
-const ROLE_USER = 'user';
-
 let UserSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -11,10 +8,6 @@ let UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    role: {
-        type: String,
-        default: ROLE_USER
     }
 }, {
     toJSON: {
@@ -29,4 +22,4 @@ let UserSchema = new mongoose.Schema({
 
 let UserModel = mongoose.model('User', UserSchema);
 
-export {UserModel, ROLE_ADMIN};
+export {UserModel};

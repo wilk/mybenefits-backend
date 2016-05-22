@@ -14,7 +14,7 @@ class HttpError implements Error {
 interface ICRUDController {
     prefix: string;
     
-    list(req, res, next);
+    list?(req, res, next);
     single(req, res, next);
     create(req, res, next);
     delete(req, res, next);

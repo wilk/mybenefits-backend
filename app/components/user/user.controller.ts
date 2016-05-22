@@ -1,21 +1,8 @@
 import {BaseController, ICRUDController, HttpError} from '../../utils/util.util';
-import {UserModel, ROLE_ADMIN} from './user.model';
+import {UserModel} from './user.model';
 
 class UserController extends BaseController implements ICRUDController {
     prefix = 'UserController::';
-
-    async list(req, res, next) {
-        try {
-            this.logger.info(`${this.prefix}list`);
-            if (req.user.role !== ROLE_ADMIN) return res.status(400).send('you are not allowed to list the users');
-
-            let users = await UserModel.find({});
-            res.json(users);
-        }
-        catch (err) {
-            BaseController.errorHandler(err, next);
-        }
-    }
 
     async create(req, res, next) {
         try {
@@ -40,6 +27,8 @@ class UserController extends BaseController implements ICRUDController {
 
             let userId = req.params.id;
 
+            if (userId !== req.user.id) return next(new HttpError(403, `you are not allowed to read the user with id ${userId}`));
+
             let user = await UserModel.findById(userId);
             if (user === null) return next(new HttpError(404, `missing user with id ${userId}`));
             res.json(user);
@@ -53,13 +42,13 @@ class UserController extends BaseController implements ICRUDController {
         try {
             this.logger.info(`${this.prefix}update`);
 
-            // @todo: check if the user can update the selected user
-
             let userId = req.params.id;
             let userData = {
                 email: req.body.email,
                 password: req.body.email
             };
+
+            if (userId !== req.user.id) return next(new HttpError(403, `you are not allowed to update the user with id ${userId}`));
 
             await UserModel.findByIdAndUpdate(userId, userData);
             res.end();
@@ -73,6 +62,9 @@ class UserController extends BaseController implements ICRUDController {
         try {
             this.logger.info(`${this.prefix}delete`);
             let userId = req.params.id;
+
+            if (userId !== req.user.id) return next(new HttpError(403, `you are not allowed to remove the user with id ${userId}`));
+
             await UserModel.findByIdAndRemove(userId);
             res.end();
         }
