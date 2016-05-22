@@ -12,10 +12,12 @@ let UserSchema = new mongoose.Schema({
 }, {
     toJSON: {
         transform: function (doc, ret) {
-            return {
-                id: ret._id,
-                email: ret.email
-            };
+            ret.id = ret._id;
+            delete ret._id;
+            delete ret.__v;
+            delete ret.password;
+            
+            return ret;
         }
     }
 });

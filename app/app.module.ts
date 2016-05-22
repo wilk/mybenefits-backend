@@ -5,9 +5,9 @@ import {authMiddleware} from './middlewares/auth.middleware';
 import {errorMiddleware} from './middlewares/error.middleware';
 import {loggerMiddleware} from './middlewares/logger.middleware';
 import {userRouter} from './components/user/user.router';
-/*import {transactionRouter} from 'app/components/transaction/transaction.router';
-import {accountRouter} from 'app/components/account/account.router';
-import {authRouter} from 'app/components/auth/auth.router';*/
+//import {transactionRouter} from 'app/components/transaction/transaction.router';
+import {accountRouter} from './components/account/account.router';
+//import {authRouter} from 'app/components/auth/auth.router';
 
 let app = express();
 
@@ -20,8 +20,8 @@ app.get('/', (req, res) => {res.send('lol')});
 /*app.use('/auth', authRouter);*/
 
 app.use('/api/users', /*authMiddleware,*/ userRouter);
-/*app.use('/api/accounts', authMiddleware, userRouter);
-app.use('/api/transactions', authMiddleware, userRouter);*/
+app.use('/api/accounts', /*authMiddleware,*/ accountRouter);
+//app.use('/api/transactions', authMiddleware, transactionRouter);
 
 app.use(errorMiddleware);
 
