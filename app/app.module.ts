@@ -1,13 +1,13 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
-import {authMiddleware} from 'app/middlewares/auth.middleware';
-import {errorMiddleware} from 'app/middlewares/error.middleware';
-import {loggerMiddleware} from 'app/middlewares/logger.middleware';
-import {userRouter} from 'app/components/user/user.router';
+import {authMiddleware} from './middlewares/auth.middleware';
+import {errorMiddleware} from './middlewares/error.middleware';
+import {loggerMiddleware} from './middlewares/logger.middleware';
+/*import {userRouter} from 'app/components/user/user.router';
 import {transactionRouter} from 'app/components/transaction/transaction.router';
 import {accountRouter} from 'app/components/account/account.router';
-import {authRouter} from 'app/components/auth/auth.router';
+import {authRouter} from 'app/components/auth/auth.router';*/
 
 let app = express();
 
@@ -15,11 +15,13 @@ app.use(loggerMiddleware);
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/auth', authRouter);
+app.get('/', (req, res) => {res.send('lol')});
+
+/*app.use('/auth', authRouter);
 
 app.use('/api/users', authMiddleware, userRouter);
 app.use('/api/accounts', authMiddleware, userRouter);
-app.use('/api/transactions', authMiddleware, userRouter);
+app.use('/api/transactions', authMiddleware, userRouter);*/
 
 app.use(errorMiddleware);
 
@@ -30,7 +32,7 @@ class Server {
         this.app = app;
     }
     
-    async start(port: number): Promise<void> {
+    async start(port: number): Promise<any> {
         return new Promise(resolve => {
             this.app.listen(port, () => {
                 resolve();
@@ -38,7 +40,7 @@ class Server {
         });
     }
     
-    async stop(): Promise<void> {
+    async stop(): Promise<any> {
         return new Promise(resolve => {
             this.app.close(() => {
                 resolve();

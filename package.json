@@ -8,7 +8,8 @@
     "postinstall": "tsd install",
     "pretest": "tslint index.ts ./lib/**/*.ts ./test/**/*.ts && tsc",
     "preversion": "tslint index.ts",
-    "test": "mocha dist/test --no-timeouts"
+    "test": "mocha dist/test --no-timeouts",
+    "start": "tsc && node dist/index.js | bunyan"
   },
   "author": {
     "name": "Vincenzo (Wilk) Ferrari",

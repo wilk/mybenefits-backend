@@ -3,7 +3,7 @@
     "port": 12345
   },
   "db": {
-    "url": "mongo://localhost/myBenefits"
+    "url": "mongodb://localhost/myBenefits"
   },
   "logger": {
     "name": "myBenefits"
