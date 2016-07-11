@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 
+// @todo: replace this model with a TreeModel
 let AccountSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -9,7 +10,11 @@ let AccountSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    description: String
+    description: String,
+    balance: {
+        type: Number,
+        default: 0
+    }
 }, {
     toJSON: {
         transform: function (doc, ret) {

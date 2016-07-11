@@ -37,13 +37,17 @@ class TransactionController extends BaseController implements ICRUDController {
                 date: moment(req.body.date)
             };
 
-            let account = await AccountModel.findOne({_id: transactionData.accountId, userId: transactionData.userId});
+            let account: any = await AccountModel.findOne({_id: transactionData.accountId, userId: transactionData.userId});
             if (account === null) return next(new HttpError(403, 'this user is not allowed to create a new transaction for the requested account'));
 
-            if (req.body.expense) transactionData.expense = req.body.expense;
-            if (req.body.income) transactionData.income = req.body.income;
+            if (req.body.expense) transactionData.expense = req.body.expense || 0;
+            if (req.body.income) transactionData.income = req.body.income || 0;
+            transactionData.balance = transactionData.expense - transactionData.income;
+            
+            account.balance += transactionData.balance;
 
-            let transaction = await TransactionModel.create(transactionData);
+            let results = await [TransactionModel.create(transactionData), account.save()];
+            let transaction = results[0];
             res.json(transaction);
         }
         catch (err) {

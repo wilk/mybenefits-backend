@@ -24,6 +24,10 @@ let TransactionSchema = new mongoose.Schema({
     income: {
         type: Number,
         default: 0
+    },
+    balance: {
+        type: Number,
+        default: 0
     }
 }, {
     toJSON: {

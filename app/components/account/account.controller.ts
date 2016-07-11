@@ -64,6 +64,7 @@ class AccountController extends BaseController implements ICRUDController {
             };
 
             await AccountModel.findOneAndUpdate({_id: accountId, userId: userId}, accountData);
+            // @todo: return the updated entity
             res.end();
         }
         catch (err) {

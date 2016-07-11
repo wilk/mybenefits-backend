@@ -15,8 +15,6 @@ app.use(loggerMiddleware);
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {res.send('lol')});
-
 app.use('/auth', authRouter);
 
 app.use('/api/users', authMiddleware, userRouter);

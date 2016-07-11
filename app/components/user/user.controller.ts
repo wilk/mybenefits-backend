@@ -28,12 +28,13 @@ class UserController extends BaseController implements ICRUDController {
             let userId = req.params.id;
             let userData = {
                 email: req.body.email,
-                password: req.body.email
+                password: req.body.password
             };
 
             if (userId !== req.user.id) return next(new HttpError(403, `you are not allowed to update the user with id ${userId}`));
 
             await UserModel.findByIdAndUpdate(userId, userData);
+            // @todo: return the updated entity
             res.end();
         }
         catch (err) {
